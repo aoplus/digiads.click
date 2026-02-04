@@ -1,5 +1,3 @@
-"use server";
-
 import type { z } from "zod";
 import { contactFormSchema } from "@/lib/schemas";
 
