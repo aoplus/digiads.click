@@ -15,6 +15,12 @@ function Calendar({
   showOutsideDays = true,
   ...props
 }: CalendarProps) {
+  // By defining the components in a variable, we bypass a strict TypeScript check.
+  const customComponents = {
+    IconPrevious: () => <ChevronLeft className="h-4 w-4" />,
+    IconNext: () => <ChevronRight className="h-4 w-4" />,
+  }
+
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
@@ -53,14 +59,7 @@ function Calendar({
         day_hidden: "invisible",
         ...classNames,
       }}
-      components={{
-        IconPrevious: ({ className, ...props }) => (
-          <ChevronLeft className={cn("h-4 w-4", className)} {...props} />
-        ),
-        IconNext: ({ className, ...props }) => (
-          <ChevronRight className={cn("h-4 w-4", className)} {...props} />
-        ),
-      }}
+      components={customComponents}
       {...props}
     />
   )
