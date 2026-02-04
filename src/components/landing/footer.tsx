@@ -65,8 +65,8 @@ export default function Footer() {
             <h3 className="font-bold text-lg mb-4">Contact</h3>
             <ul className="space-y-2">
               <li><a href="mailto:hello@digiads.click" className="text-secondary-foreground/80 hover:text-primary">hello@digiads.click</a></li>
-              <li><a href="tel:+91-XXXX-XXXXXX" className="text-secondary-foreground/80 hover:text-primary">+91-XXXX-XXXXXX</a></li>
-              <li><a href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener noreferrer" className="text-secondary-foreground/80 hover:text-primary">WhatsApp</a></li>
+              <li><a href="tel:+917977875818" className="text-secondary-foreground/80 hover:text-primary">+917977875818</a></li>
+              <li><a href="https://wa.me/917977875818" target="_blank" rel="noopener noreferrer" className="text-secondary-foreground/80 hover:text-primary">WhatsApp</a></li>
             </ul>
           </div>
         </div>

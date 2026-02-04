@@ -193,8 +193,8 @@ export function ContactForm() {
       </Form>
       <div className="text-center mt-6">
         <p className="text-sm text-muted-foreground">Prefer to talk first? Call/WhatsApp:
-          <a href="tel:+91-XXXX-XXXXXX" className="font-semibold text-foreground underline ml-1">
-            +91-XXXX-XXXXXX
+          <a href="tel:+917977875818" className="font-semibold text-foreground underline ml-1">
+            +917977875818
           </a>
         </p>
       </div>
