@@ -17,7 +17,7 @@ export default function WhyUsSection() {
         },
     ]
     return (
-    <section id="about" className="py-16 sm:py-24 bg-background">
+    <section id="about" className="py-16 sm:py-24 bg-muted">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground font-headline">
@@ -32,7 +32,7 @@ export default function WhyUsSection() {
                     </div>
                     <div className="md:-mt-2">
                         <h3 className="text-2xl font-bold">{reason.headline}</h3>
-                        <p className="mt-2 text-foreground/80">{reason.text}</p>
+                        <p className="mt-2 text-lg text-foreground/80">{reason.text}</p>
                     </div>
                 </div>
             ))}

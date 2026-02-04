@@ -1,51 +1,30 @@
 "use client";
 
-import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { X, Target, Phone, Menu } from 'lucide-react';
+import { Phone, Menu } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 export default function Header() {
-  const [isBannerVisible, setIsBannerVisible] = useState(true);
-
   const navItems = [
-    { name: 'Home', href: '#home' },
     { name: 'Services', href: '#services' },
-    { name: 'Pricing', href: '#pricing' },
-    { name: 'Results', href: '#results' },
+    { name: 'Industries', href: '#clients' },
+    { name: 'Case Studies', href: '#results' },
     { name: 'About', href: '#about' },
+    { name: 'Blog', href: '#' },
     { name: 'Contact', href: '#contact' },
   ];
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur-sm border-b">
-      {isBannerVisible && (
-        <div className="relative bg-secondary text-secondary-foreground">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-2 text-center text-sm font-medium">
-            <Target className="inline-block h-4 w-4 mr-2" />
-            Limited Offer: First 10 Clients Get 50% Off Month 1 -{' '}
-            <Link href="#contact" className="underline font-bold hover:text-primary">
-              Book Free Audit Now
-            </Link>
-          </div>
-          <button
-            onClick={() => setIsBannerVisible(false)}
-            className="absolute top-1/2 right-4 -translate-y-1/2"
-            aria-label="Dismiss banner"
-          >
-            <X className="h-5 w-5" />
-          </button>
-        </div>
-      )}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           <div className="flex-shrink-0">
-            <Link href="#home" className="text-2xl font-bold text-foreground">
+            <Link href="#home" className="text-3xl font-bold text-foreground">
               DigiAds<span className="text-primary">.click</span>
             </Link>
           </div>
-          <nav className="hidden md:flex md:items-center md:space-x-8">
+          <nav className="hidden lg:flex lg:items-center lg:space-x-8">
             {navItems.map((item) => (
               <Link
                 key={item.name}
@@ -56,16 +35,16 @@ export default function Header() {
               </Link>
             ))}
           </nav>
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-4">
             <a href="tel:+91-XXXX-XXXXXX" className="flex items-center font-medium text-sm text-foreground/80 hover:text-primary">
               <Phone className="h-4 w-4 mr-2" />
               +91-XXXX-XXXXXX
             </a>
             <Button asChild>
-              <Link href="#contact">Get Free Digital Audit</Link>
+              <Link href="#contact">Free Consultation</Link>
             </Button>
           </div>
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon">
@@ -92,7 +71,7 @@ export default function Header() {
                         +91-XXXX-XXXXXX
                      </a>
                      <Button asChild className="w-full">
-                       <Link href="#contact">Get Free Digital Audit</Link>
+                       <Link href="#contact">Free Consultation</Link>
                      </Button>
                   </div>
                 </div>

@@ -1,5 +1,7 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import Link from "next/link";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Search, Smartphone, BarChart, Briefcase, Video, MessageCircle } from 'lucide-react';
+import { Button } from "../ui/button";
 
 export default function ServicesOverview() {
   const services = [
@@ -45,14 +47,19 @@ export default function ServicesOverview() {
         </div>
         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300">
+            <Card key={index} className="text-center hover:shadow-xl transition-shadow duration-300 flex flex-col">
               <CardHeader>
                 <div className="mx-auto bg-primary/10 p-4 rounded-full w-fit mb-4">{service.icon}</div>
                 <CardTitle className="text-xl font-bold">{service.title}</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="flex-grow">
                 <p className="text-foreground/80">{service.description}</p>
               </CardContent>
+              <CardFooter>
+                 <Button variant="link" asChild className="p-0 text-primary w-full justify-center">
+                    <Link href="#">Learn More →</Link>
+                 </Button>
+              </CardFooter>
             </Card>
           ))}
         </div>

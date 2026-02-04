@@ -13,11 +13,7 @@ export default function FaqSection() {
     },
     {
       question: "What is 'performance pricing' and how does it work?",
-      answer: "You pay a base retainer (₹25K-1.25L depending on package) that covers our costs. Then, you add a performance bonus: 10-15% of the value of qualified leads we generate. Example: If we generate 100 leads worth ₹5L to you, we get a ₹50K-75K bonus. We only make more when you make more.",
-    },
-    {
-      question: "What's a 'qualified lead'? Who decides?",
-      answer: "We define this together upfront. Typically: contact info + specific criteria (budget, timeline, decision-maker). We track leads in your CRM. If a lead doesn't meet criteria, it doesn't count toward the performance bonus.",
+      answer: "You pay a base retainer (e.g., ₹60,000) that covers our costs. Then, you add a performance bonus: 10-15% of the value of qualified leads we generate. Example: If we generate 100 leads worth ₹5L to you, we get a ₹50K-75K bonus. We only make more when you make more.",
     },
     {
       question: "Can I just pay the base retainer (no performance bonus)?",
@@ -28,24 +24,28 @@ export default function FaqSection() {
       answer: "Realistic timeline: 30-60 days for paid ads (Google, Meta), 90-120 days for SEO. We set KPIs together and track weekly. If we're not on track by day 60, we course-correct aggressively.",
     },
     {
-        question: "What if I've tried digital marketing before and it didn't work?",
-        answer: "You're not alone. Most MSMEs have been burned by agencies overpromising and underdelivering. Key differences with us: (1) We focus on leads/sales, not vanity metrics. (2) Transparent reporting (you see everything). (3) We specialize in your segment (MSMEs), not trying to serve everyone."
+      question: "What if I've tried digital marketing before and it didn't work?",
+      answer: "You're not alone. Most MSMEs have been burned by agencies overpromising and underdelivering. Key differences with us: (1) We focus on leads/sales, not vanity metrics. (2) Transparent reporting (you see everything). (3) We specialize in your segment (MSMEs), not trying to serve everyone."
     },
     {
-        question: "Do I need to sign a long-term contract?",
-        answer: "No. We offer month-to-month agreements. We earn your business every month by delivering results. (We do recommend 3-6 months to see the full potential, but you can cancel anytime with 30 days notice.)"
+      question: "Do I need to sign a long-term contract?",
+      answer: "No. We offer month-to-month agreements. We earn your business every month by delivering results. (We do recommend 3-6 months to see the full potential, but you can cancel anytime with 30 days notice.)"
     },
     {
-        question: "What industries do you work with?",
-        answer: "Our sweet spot: Manufacturing, B2B services (consulting, legal, accounting), Healthcare/wellness, Retail/D2C, Education. We avoid: Highly regulated industries (pharma, financial products), businesses with <₹30K marketing budget."
+      question: "What industries do you work with?",
+      answer: "Our sweet spot: Manufacturing, B2B services (consulting, legal, accounting), Healthcare/wellness, Retail/D2C, Education. We avoid: Highly regulated industries (pharma, financial products), businesses with <₹30K marketing budget."
     },
     {
-        question: "Can you guarantee X number of leads or Y ROI?",
-        answer: "We don't make guarantees because too many variables are outside our control (your sales team's closing rate, product-market fit, etc.). What we DO guarantee: Transparent reporting, best-in-class execution, and our 90-day money-back policy if we don't hit agreed-upon KPIs."
+      question: "Can you guarantee X number of leads or Y ROI?",
+      answer: "We don't make guarantees because too many variables are outside our control (your sales team's closing rate, product-market fit, etc.). What we DO guarantee: Transparent reporting, best-in-class execution, and our 90-day money-back policy if we don't hit agreed-upon KPIs."
     },
     {
         question: "How do you measure ROI?",
         answer: "We track: (1) Leads generated, (2) Cost per lead, (3) Lead-to-customer conversion rate (you tell us), (4) Customer lifetime value (you tell us). Then: (Revenue from new customers - Marketing cost) / Marketing cost = ROI. We show this in your real-time dashboard."
+    },
+    {
+        question: "Do you work with companies outside India?",
+        answer: "We focus on Indian MSMEs primarily. For international companies with India operations, please contact us to discuss."
     },
   ];
 

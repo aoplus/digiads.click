@@ -61,9 +61,9 @@ export function ContactForm() {
   return (
     <div className="w-full max-w-3xl bg-background p-8 rounded-lg shadow-2xl">
       <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold text-foreground">Incentive</h3>
+        <h3 className="text-2xl font-bold text-primary">Incentive</h3>
         <p className="text-muted-foreground mt-2">
-          First 10 Businesses Get: Free competitor analysis + 50% off Month 1 (₹12.5K-62.5K savings)
+          First 10 Businesses Get: Free competitor analysis + 50% off Month 1
         </p>
       </div>
       <Form {...form}>

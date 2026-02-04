@@ -50,7 +50,7 @@ export default function SolutionSection() {
         </div>
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
           {pillars.map((pillar, index) => (
-            <Card key={index} className="flex flex-col">
+            <Card key={index} className="flex flex-col transform hover:-translate-y-2 transition-transform duration-300 shadow-lg">
               <CardHeader>
                 <div className="bg-primary/10 p-4 rounded-full w-fit mb-4">{pillar.icon}</div>
                 <CardTitle className="text-2xl font-bold">{pillar.headline}</CardTitle>
@@ -58,7 +58,7 @@ export default function SolutionSection() {
               <CardContent className="flex-grow">
                 <p className="text-foreground/80">{pillar.paragraph}</p>
               </CardContent>
-              <CardFooter className="flex-col items-start space-y-4">
+              <CardFooter className="flex-col items-start space-y-4 pt-6">
                 <div className="bg-accent/20 text-accent-foreground font-bold py-1 px-3 rounded-full text-sm">
                   {pillar.stat}
                 </div>
