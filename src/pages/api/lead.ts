@@ -32,7 +32,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
   if (!response.ok) {
     console.error('ERP lead submission failed', response.status);
-    return json({ error: 'We could not save your enquiry. Please WhatsApp us instead.' }, response.status);
+    return json({ error: 'We could not save your enquiry. Please WhatsApp us instead.' }, 502);
   }
   return json({ ok: true });
 };
