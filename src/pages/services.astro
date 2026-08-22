@@ -1,0 +1,4 @@
+---
+import Page from '../components/Page.astro'; const services=[['Brand Foundation','Logo refinement, basic brand identity, colours, typography and social profile identity.'],['Digital Foundation','Landing page, custom domain, business email, Google Business Profile, basic SEO and analytics.'],['Content & Creative','Static, festive and branding creatives, content calendar and posting.'],['Lead Generation','Meta lead campaigns, enquiry forms, WhatsApp CTA and CRM integration.'],['Optimization','Campaign monitoring, performance tracking, creative and audience optimization.']];
+---
+<Page title="Services" heading="The building blocks of practical digital growth" intro="A connected scope designed to help Indian businesses build, launch and improve."><div class="grid">{services.map(([h,p])=><article class="card"><h3>{h}</h3><p>{p}</p></article>)}</div></Page>

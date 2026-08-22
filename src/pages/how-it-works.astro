@@ -1,0 +1,4 @@
+---
+import Page from '../components/Page.astro'; const steps=[['01','Discover','Understand the business, offer, audience and market.'],['02','Build','Set up the digital foundation, landing page, profiles, tracking and CRM.'],['03','Launch','Create content and launch lead-generation campaigns.'],['04','Optimize','Monitor performance and improve campaigns throughout the 90 days.']];
+---
+<Page title="How It Works" heading="A simple 90-day path to momentum" intro="A focused process for turning your business offer into a measurable digital system."><div class="grid">{steps.map(([n,h,p])=><article class="card"><b>{n}</b><h3>{h}</h3><p>{p}</p></article>)}</div></Page>

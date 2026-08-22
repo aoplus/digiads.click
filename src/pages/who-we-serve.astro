@@ -1,0 +1,4 @@
+---
+import Page from '../components/Page.astro'; const types=['Local Businesses','Manufacturers & MSMEs','Professional Services','Coaches & Educators','Real Estate & Builders','Retail & Consumer Businesses','Startups'];
+---
+<Page title="Who We Serve" heading="Digital growth for ambitious Indian businesses" intro="DigiAds is designed for SMBs and MSMEs that want a practical, connected way to build their digital foundation and generate leads."><div class="grid">{types.map(x=><article class="card"><h3>{x}</h3><p>Clear messaging, practical setup and lead-generation support built around your business.</p></article>)}</div></Page>

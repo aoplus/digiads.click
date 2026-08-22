@@ -1,0 +1,4 @@
+---
+import Base from './Base.astro'; import {campaign,wa,site} from '../config/site'; const {title,heading,intro,children}=Astro.props;
+---
+<Base title={`${title} | DigiAds.click`} description={intro}><main><section class="page-hero"><div class="wrap"><div class="kicker">DigiAds.click</div><h1>{heading}</h1><p class="lede">{intro}</p></div></section><section><div class="wrap"><slot /></div></section><section class="soft"><div class="wrap cta"><div class="kicker">{campaign.name}</div><h2>Build your digital foundation. Generate leads. Measure growth.</h2><p>₹{campaign.offerPrice.toLocaleString('en-IN')} for 90 days. First {campaign.slots} businesses only. Offer ends {campaign.deadline}.</p><a class="btn ghost" data-event="offer_cta_click" data-location="page-cta" href={wa('page CTA')}>Claim Festive Offer</a></div></section></main></Base>

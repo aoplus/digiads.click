@@ -1,0 +1,3 @@
+export const site = { name: 'DigiAds.click', url: 'https://digiads.click', whatsapp: '919833375149', phone: '+917977875818', email: 'marketing@digiads.click', ga: import.meta.env.PUBLIC_GA_MEASUREMENT_ID || 'G-SSRW674JW7' };
+export const campaign = { enabled: true, name: 'Ganesh Chaturthi Growth Special', headline: 'Get Your Business Digital-Ready for Ganeshotsav', regularPrice: 90000, offerPrice: 60000, saving: 30000, deadline: '31 August 2026', slots: 10 };
+export const wa = (location: string) => `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(`Hi DigiAds, I would like to discuss the 90-Day Growth Program (${location}).`)}`;
