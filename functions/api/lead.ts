@@ -24,8 +24,6 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   const name = value('name', 140);
   const business = value('business', 140);
   const phone = value('phone', 40);
-  const need = value('need', 280);
-  const message = value('message', 1200);
 
   if (!name || !phone) return json({ error: 'Please enter your name and WhatsApp number.' }, 400);
 
@@ -40,7 +38,6 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       lead_name: name,
       company_name: business || undefined,
       mobile_no: phone,
-      notes: [`DigiAds.click campaign enquiry`, `Campaign: Ganeshotsav Growth Special`, need && `Need: ${need}`, message && `Message: ${message}`].filter(Boolean).join('\n'),
     }),
   });
 
