@@ -43,7 +43,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
   if (!response.ok) {
     console.error('ERP lead submission failed', response.status);
-    return json({ error: 'We could not save your enquiry. Please WhatsApp us instead.' }, 502);
+    return json({ error: 'We could not save your enquiry. Please WhatsApp us instead.' }, response.status);
   }
 
   return json({ ok: true });
