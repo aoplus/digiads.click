@@ -1,17 +1,15 @@
-interface Env {
-  ERP_API_KEY: string;
-  ERP_API_SECRET: string;
-}
+import type { APIRoute } from 'astro';
 
 const json = (body: unknown, status = 200) => new Response(JSON.stringify(body), {
   status,
   headers: { 'content-type': 'application/json; charset=utf-8' },
 });
 
-export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
-  if (!env.ERP_API_KEY || !env.ERP_API_SECRET) {
-    return json({ error: 'Lead capture is not configured yet.' }, 503);
-  }
+export const POST: APIRoute = async ({ request, locals }) => {
+  const runtime = (locals as { runtime?: { env?: Record<string, string> } }).runtime;
+  const key = runtime?.env?.ERP_API_KEY;
+  const secret = runtime?.env?.ERP_API_SECRET;
+  if (!key || !secret) return json({ error: 'Lead capture is not configured yet.' }, 503);
 
   let payload: Record<string, unknown>;
   try {
@@ -24,27 +22,17 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   const name = value('name', 140);
   const business = value('business', 140);
   const phone = value('phone', 40);
-
   if (!name || !phone) return json({ error: 'Please enter your name and WhatsApp number.' }, 400);
 
   const response = await fetch('https://aoplus.in/api/resource/Lead', {
     method: 'POST',
-    headers: {
-      Authorization: `token ${env.ERP_API_KEY}:${env.ERP_API_SECRET}`,
-      'content-type': 'application/json',
-      Accept: 'application/json',
-    },
-    body: JSON.stringify({
-      lead_name: name,
-      company_name: business || undefined,
-      mobile_no: phone,
-    }),
+    headers: { Authorization: `token ${key}:${secret}`, 'content-type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify({ lead_name: name, company_name: business || undefined, mobile_no: phone }),
   });
 
   if (!response.ok) {
     console.error('ERP lead submission failed', response.status);
     return json({ error: 'We could not save your enquiry. Please WhatsApp us instead.' }, response.status);
   }
-
   return json({ ok: true });
 };
