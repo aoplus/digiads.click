@@ -1,0 +1,39 @@
+---
+import { navratri } from '../config/site';
+const { variant = 'top' } = Astro.props;
+---
+{navratri.enabled && (
+<section class={`nv-banner-wrap nv-${variant}`}>
+  <a class="nv-banner" href={navratri.path} data-event="navratri_banner_click" data-location={`home-banner-${variant}`} aria-label="Explore our Navratri offers">
+    <span class="nv-lights" aria-hidden="true">{Array.from({length:18}).map((_,i)=><i style={`--d:${(i%6)*0.25}s`}></i>)}</span>
+    <span class="nv-diya" aria-hidden="true">
+      <svg viewBox="0 0 120 120" width="84" height="84"><g fill="none" stroke-linecap="round"><path d="M60 8c10 14 16 22 4 36-6-4-14-6-4-36z" fill="#ffb02e"/><path d="M60 22c5 8 8 12 2 20-3-2-7-3-2-20z" fill="#fff3c4"/></g><path d="M18 70h84c0 22-18 38-42 38S18 92 18 70z" fill="#c9922b"/><ellipse cx="60" cy="70" rx="42" ry="9" fill="#e6b24c"/><circle cx="26" cy="64" r="8" fill="#f59e0b"/><circle cx="94" cy="64" r="8" fill="#f59e0b"/></svg>
+    </span>
+    <span class="nv-text">
+      <small>{navratri.label}</small>
+      <b>Explore our Navratri Offers</b>
+      <em>Digital marketing packages from ₹4,999/mo &rarr;</em>
+    </span>
+    <span class="nv-diya nv-right" aria-hidden="true">
+      <svg viewBox="0 0 120 120" width="84" height="84"><g stroke-linecap="round"><path d="M60 8c10 14 16 22 4 36-6-4-14-6-4-36z" fill="#ffb02e"/><path d="M60 22c5 8 8 12 2 20-3-2-7-3-2-20z" fill="#fff3c4"/></g><path d="M18 70h84c0 22-18 38-42 38S18 92 18 70z" fill="#c9922b"/><ellipse cx="60" cy="70" rx="42" ry="9" fill="#e6b24c"/><circle cx="26" cy="64" r="8" fill="#f59e0b"/><circle cx="94" cy="64" r="8" fill="#f59e0b"/></svg>
+    </span>
+  </a>
+</section>
+)}
+<style is:global>
+.nv-banner-wrap{padding:22px 0;background:#fff}
+.nv-banner-wrap.nv-mid{padding:0 0 10px;margin-top:-40px}
+.nv-banner{position:relative;display:flex;align-items:center;justify-content:center;gap:26px;width:min(1120px,calc(100% - 40px));margin:0 auto;padding:30px 24px;border-radius:20px;text-align:center;color:#fff;overflow:hidden;background:radial-gradient(circle at 15% 20%,#e0752955,transparent 40%),linear-gradient(135deg,#7a0f1a,#a3161f 55%,#8c1018);box-shadow:0 18px 40px #7a0f1a40;transition:transform .25s,box-shadow .25s}
+.nv-banner:hover{transform:translateY(-3px);box-shadow:0 24px 50px #7a0f1a55}
+.nv-lights{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-around;pointer-events:none}
+.nv-lights i{width:8px;height:8px;border-radius:50%;background:#ffd36b;margin-top:7px;box-shadow:0 0 10px 3px #ffc94d99;animation:nvTw 1.8s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes nvTw{50%{opacity:.35;transform:scale(.8)}}
+.nv-text small{display:block;letter-spacing:.2em;text-transform:uppercase;font-weight:800;font-size:.72rem;color:#ffd36b}
+.nv-text b{display:block;font-family:Georgia,'Times New Roman',serif;font-size:clamp(1.6rem,4vw,2.6rem);line-height:1.1;margin:6px 0;letter-spacing:-.01em}
+.nv-text em{font-style:normal;color:#ffe9b8;font-weight:600;font-size:.98rem}
+.nv-diya svg{filter:drop-shadow(0 0 14px #ffb02e88)}
+.nv-diya path:first-child{animation:nvFl 1.4s ease-in-out infinite;transform-origin:60px 44px}
+@keyframes nvFl{50%{transform:scale(1.08,.94)}}
+@media(max-width:760px){.nv-diya{display:none}.nv-banner{padding:34px 18px 26px}}
+@media(prefers-reduced-motion:reduce){.nv-lights i,.nv-diya path:first-child{animation:none}}
+</style>

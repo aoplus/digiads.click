@@ -2,3 +2,5 @@ export const site = { name: 'DigiAds.click', url: 'https://digiads.click', whats
 export const campaign = { enabled: true, name: 'Ganesh Chaturthi Growth Special', headline: 'Get Your Business Digital-Ready for Ganeshotsav', regularPrice: 90000, offerPrice: 60000, saving: 30000, deadline: '31 August 2026', slots: 10 };
 export const campaignConfig = { slug: 'ganeshotsav-growth-special', campaignName: 'Ganesh Chaturthi Growth Special', campaignShortName: 'Ganesh Chaturthi', headline: 'Get Your Business Digital-Ready for Ganeshotsav', regularPrice: 90000, offerPrice: 60000, saving: 30000, duration: '90 Days', slots: 10, deadline: '31 August 2026', trackingId: 'ganesh_chaturthi_2026', enabled: true };
 export const wa = (location: string) => `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(`Hi DigiAds, I would like to discuss the 90-Day Growth Program (${location}).`)}`;
+export const navratri = { enabled: true, label: 'Navratri Special 2026', path: '/navratri-offers', phone: '+91XXXXXXXXXX', phoneDisplay: '+91 9987404296', email: 'subolaxmi@aoplus.in', formUrl: 'https://crm.aoplus.in/digital-marketing/new' };
+
