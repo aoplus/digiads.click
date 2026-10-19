@@ -5,35 +5,45 @@ import { navratri, wa } from '../config/site';
 if (!navratri.enabled) return Astro.redirect('/');
 
 const plans = [
-  { id:'starter', name:'Social Starter', short:'Starter', price:'₹4,999', emoji:'', best:'Local shops & solo businesses',
+  { id:'starter', name:'Social Starter', short:'Starter', price:'₹4,999', was:'₹10,000', best:'Local shops & solo businesses',
     platforms:['facebook','instagram'],
     highlights:['28 posts a month','8 stories','Monthly report'],
-    tiles:[[4,'Posts'],[2,'Reels'],[1,'Creative'],[2,'Stories']],
-    perks:['Bio cleanup & highlight covers','Captions + hashtags','WhatsApp link in bio','Monthly PDF report','Email & chat support'] },
-  { id:'pro', name:'Social Pro', short:'Pro', price:'₹9,999', emoji:'', featured:true, best:'Growing businesses & local brands',
+    extras:['Highlight covers & contact button','Brand-friendly captions','WhatsApp link in bio','Monthly PDF report'],
+    mix:'4 posts · 2 reels · 1 creative' },
+  { id:'pro', name:'Social Pro', short:'Pro', price:'₹9,999', was:'₹20,000', featured:true, best:'Growing businesses & local brands',
     platforms:['facebook','instagram','linkedin','x'],
     highlights:['40 posts a month','4–5 page website','Google Business'],
-    tiles:[[5,'Posts'],[3,'Reels'],[2,'Creatives'],[4,'Stories']],
-    perks:['4–5 page website + WhatsApp button','Google Business: 1 post / week','We reply to comments & DMs','Lead forms','Detailed monthly report','Chat, email & phone support'] },
-  { id:'elite', name:'Social Elite', short:'Elite', price:'₹14,999', emoji:'', best:'Scaling brands & e-commerce',
+    extras:['WhatsApp button on website','Inquiry & lead forms','Monthly site maintenance','Review reply templates','Detailed monthly report'],
+    mix:'5 posts · 3 reels · 2 creatives' },
+  { id:'elite', name:'Social Elite', short:'Elite', price:'₹14,999', was:'₹30,000', best:'Scaling brands & e-commerce',
     platforms:['facebook','instagram','linkedin','x','shorts','pinterest'],
     highlights:['52 posts a month','Website + Ads','Live dashboard'],
-    tiles:[[6,'Posts'],[4,'Videos'],[3,'Creatives'],['Daily','Stories']],
-    perks:['6–8 page website, fully managed','2 ad campaigns (Meta / Google)','Google Business full setup','Competitor tracking','Instant WhatsApp lead alerts','Weekly live dashboard','Priority support'] },
+    extras:['Website chat + contact forms','Monthly site maintenance','Weekly ad optimisation','Photo updates & review replies','Instant WhatsApp lead alerts','Weekly live dashboard'],
+    mix:'6 posts · 4 videos · 3 creatives' },
 ];
 const Y='✓', N='✕';
+const parse = (v) => v === N ? { ok:false, label:'' } : v.startsWith(Y) ? { ok:true, label:v.slice(1).trim() } : null;
 const rows = [
+  ['The essentials','HEAD'],
+  ['Best for','Local shops & solo','Growing & local brands','Scaling & e-commerce'],
   ['Platforms','ICONS'],
   ['Content / month','28','40','52'],
+  ['Weekly mix','MIX'],
   ['Stories / month','8','16','30'],
-  ['Company website',N,'4–5 pages','6–8 pages'],
-  ['Google Business',N,'1 post / wk','2 posts / wk'],
-  ['Comments & DMs',N,Y,Y],
-  ['Competitor tracking',N,N,Y],
-  ['Paid ads',N,N,'2 campaigns'],
   ['Lead alerts','Bio link','Forms','Instant WhatsApp'],
   ['Reports','Monthly PDF','Monthly','Live weekly'],
   ['Support','Email & chat','+ Phone','Priority'],
+  ['Account setup','Bio cleanup','Setup + custom banners','Full multi-platform branding'],
+  ['Content formats','Posts, Reels, Creatives','Posts, Reels, Creatives','Carousels, short videos, creatives'],
+  ['Captions & hashtags','Relevant hashtags','Relevant hashtags','Sales captions & viral hashtags'],
+  ['Services included','HEAD'],
+  ['Company website',N,Y+' 4–5 pages',Y+' 6–8 pages'],
+  ['Google Business',N,Y+' 1 post / wk',Y+' 2 posts / wk'],
+  ['Comments & DMs',N,Y,Y],
+  ['Competitor tracking',N,N,Y],
+  ['Paid ads',N,N,Y+' 2 campaigns'],
+  ['🪔 Festive bonuses','EXTRAS'],
+  ['','CTA'],
 ];
 ---
 <Base title="Navratri Offers | DigiAds.click" description="Digital marketing packages for Navratri: Social Starter ₹4,999, Social Pro ₹9,999, Social Elite ₹14,999 per month.">
@@ -44,12 +54,14 @@ const rows = [
       <div class="nv-eyebrow">🪔 {navratri.label} 🪔</div>
       <h1>Light up your brand this Navratri</h1>
       <p>Pick a plan. We handle the rest.</p>
+      <div class="nv-drop">🔥 Festive price drop: flat 50% OFF · only till Navratri ends</div>
       <div class="nv-prices">
         {plans.map(p => (
           <div class={`nv-price ${p.featured ? 'is-featured' : ''}`}>
             {p.featured && <span class="nv-pop">⭐ Most Popular</span>}
-            <div class="nv-emoji">{p.emoji}</div>
             <h3>{p.name}</h3>
+            <span class="nv-off">50% OFF</span>
+            <div class="was">{p.was}<span>/mo</span></div>
             <div class="amt">{p.price}<span>/mo</span></div>
             <div class="nv-plat">{p.platforms.map(n => <PlatformIcon name={n} size={30} />)}</div>
             <ul class="nv-chips">{p.highlights.map(h => <li>{h}</li>)}</ul>
@@ -66,23 +78,31 @@ const rows = [
       <h2 class="nv-h2">What you get</h2>
       <div class="nv-scroll">
         <table class="nv-table">
-          <thead><tr><th></th>{plans.map(p => <th class={p.featured ? 'f' : ''}>{p.emoji} {p.short}<br/><span>{p.price}/mo</span></th>)}</tr></thead>
-          <tbody>{rows.map(r => (
-            <tr><th scope="row">{r[0]}</th>
+          <thead><tr><th></th>{plans.map(p => <th class={p.featured ? 'f' : ''}>{p.short}<br/><span>{p.price}/mo</span></th>)}</tr></thead>
+          <tbody>{rows.map(r => r[1]==='HEAD'
+            ? <tr class="hd"><th colspan="4">{r[0]}</th></tr>
+            : (
+            <tr class={r[1]==='EXTRAS' ? 'xr' : ''}><th scope="row">{r[0]}</th>
               {r[1]==='ICONS'
                 ? plans.map(p => <td class={p.featured ? 'f' : ''}><span class="nv-plat sm">{p.platforms.map(n => <PlatformIcon name={n} size={24} />)}</span></td>)
-                : [r[1],r[2],r[3]].map((v,i) => <td class={`${i===1?'f':''} ${v===Y?'yes':''} ${v===N?'no':''}`}>{v}</td>)}
+              : r[1]==='MIX'
+                ? plans.map(p => <td class={p.featured ? 'f' : ''}>{p.mix}</td>)
+              : r[1]==='EXTRAS'
+                ? plans.map(p => <td class={`ex ${p.featured ? 'f' : ''}`}><div class="ex-list">{p.extras.map(t => <span class="tg"><span class="tg-in"><i class="tg-k">✓</i>{t}</span></span>)}</div></td>)
+              : r[1]==='CTA'
+                ? plans.map(p => <td class={p.featured ? 'f' : ''}><a class="nv-btn" href="#nv-contact" data-event="navratri_plan_click" data-location={`table-${p.id}`}>Choose {p.short}</a></td>)
+              : [r[1],r[2],r[3]].map((v,i) => {
+                  const c = parse(v);
+                  return <td class={i===1 ? 'f' : ''}>{c ? <><span class={`mk ${c.ok ? 'ok' : 'x'}`}>{c.ok ? '✓' : '✕'}</span>{c.label && <small class="mk-l">{c.label}</small>}</> : v}</td>;
+                })}
             </tr>
           ))}</tbody>
         </table>
       </div>
-      <div class="nv-learn">
-        {plans.map(p => <button type="button" class="nv-btn alt" data-open={p.id}>{p.emoji} Learn more · {p.short}</button>)}
-      </div>
       <div class="nv-notes">
-        <div><span></span>Billed monthly in advance<small>GST extra if applicable</small></div>
-        <div><span></span>Ad spend paid directly<small>Billed to your card by Meta/Google</small></div>
-        <div><span></span>You approve every post<small>Weekly drafts shared in advance</small></div>
+        <div>Billed monthly in advance<small>GST extra if applicable</small></div>
+        <div>Ad spend paid directly<small>Billed to your card by Meta/Google</small></div>
+        <div>You approve every post<small>Weekly drafts shared in advance</small></div>
       </div>
     </div>
   </section>
@@ -99,35 +119,9 @@ const rows = [
     </div>
   </section>
 
-  {plans.map(p => (
-    <div class="nv-modal" id={`m-${p.id}`} role="dialog" aria-modal="true" aria-labelledby={`t-${p.id}`} hidden>
-      <div class="nv-sheet">
-        <button type="button" class="nv-x" data-close aria-label="Close">×</button>
-        <div class="nv-emoji">{p.emoji}</div>
-        <h3 id={`t-${p.id}`}>{p.name}</h3>
-        <div class="nv-sprice">{p.price}<span>/month</span></div>
-        <p class="best">{p.best}</p>
-        <div class="nv-plat">{p.platforms.map(n => <PlatformIcon name={n} size={34} />)}</div>
-        <div class="nv-tiles">{p.tiles.map(([n,l]) => <div><b>{n}</b><span>{l}</span><i>{typeof n==='number' ? 'per week' : ''}</i></div>)}</div>
-        <ul class="nv-perks">{p.perks.map(x => <li>{x}</li>)}</ul>
-        <a class="nv-btn" href="#nv-contact" data-close>Get {p.short}</a>
-      </div>
-    </div>
-  ))}
 </main>
 
-<script is:inline>
-(function(){
-  var last;
-  function open(id){var m=document.getElementById('m-'+id);if(!m)return;last=document.activeElement;m.hidden=false;requestAnimationFrame(function(){m.classList.add('on')});document.body.style.overflow='hidden';m.querySelector('[data-close]').focus()}
-  function close(m){m.classList.remove('on');document.body.style.overflow='';setTimeout(function(){m.hidden=true},250);if(last)last.focus()}
-  document.querySelectorAll('[data-open]').forEach(function(b){b.addEventListener('click',function(){open(b.dataset.open)})});
-  document.querySelectorAll('.nv-modal').forEach(function(m){
-    m.addEventListener('click',function(e){if(e.target===m||e.target.closest('[data-close]'))close(m)});
-  });
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'){var m=document.querySelector('.nv-modal.on');if(m)close(m)}});
-})();
-</script>
+
 </Base>
 
 <style is:global>
@@ -147,7 +141,13 @@ const rows = [
 .nv-price.is-featured:hover{transform:scale(1.05) translateY(-6px)}
 .nv-emoji{font-size:2.2rem;line-height:1}
 .nv-price h3{margin:8px 0 0;font-size:1.15rem;color:var(--mar)}
-.nv-price .amt{font-size:2.8rem;font-weight:900;letter-spacing:-.05em;color:var(--red);margin:2px 0 14px}
+.nv-drop{display:inline-block;margin-top:18px;background:linear-gradient(90deg,#e6a31a,#ffd36b,#e6a31a);background-size:200% 100%;color:#4a0a10;font-weight:800;padding:9px 20px;border-radius:99px;letter-spacing:.02em;animation:nvShine 3s linear infinite,nvPulse 1.8s ease-in-out infinite;box-shadow:0 6px 20px #0004}
+@keyframes nvShine{to{background-position:-200% 0}}
+@keyframes nvPulse{50%{transform:scale(1.04)}}
+.nv-off{position:absolute;top:14px;right:14px;background:#1a9a4b;color:#fff;font-size:.7rem;font-weight:800;padding:4px 9px;border-radius:8px;letter-spacing:.04em}
+.nv-price .was{font-size:1.25rem;font-weight:700;color:#9b8587;text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px;margin-top:8px}
+.nv-price .was span{font-size:.85rem;font-weight:500;display:inline-block;text-decoration:none}
+.nv-price .amt{font-size:2.8rem;font-weight:900;letter-spacing:-.05em;color:var(--red);margin:0 0 14px;line-height:1.1}
 .nv-price .amt span{font-size:1rem;font-weight:600;color:#7b5a5e;letter-spacing:0}
 .nv-plat{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
 .nv-plat .pi{box-shadow:0 2px 8px #0003;border:1px solid #f0e3c8}
@@ -166,7 +166,7 @@ const rows = [
 .nv-tablesec .kicker{color:var(--red)}
 .nv-h2{font-family:Georgia,serif;font-size:clamp(1.7rem,3.5vw,2.4rem);margin:4px 0 20px;color:var(--mar)}
 .nv-scroll{overflow-x:auto;border-radius:16px;border:1px solid #ecd9b4;background:#fff;box-shadow:0 8px 24px #7a0f1a14}
-.nv-table{width:100%;min-width:560px;border-collapse:collapse;text-align:center}
+.nv-table{width:100%;min-width:640px;border-collapse:collapse;text-align:center}
 .nv-table th,.nv-table td{padding:14px 12px;border-bottom:1px solid #f4e9d0}
 .nv-table thead th{background:var(--mar);color:#fff;font-size:1rem;padding:16px 12px}
 .nv-table thead th span{color:#ffd36b;font-weight:600;font-size:.82rem}
@@ -174,38 +174,28 @@ const rows = [
 .nv-table tbody th{text-align:left;color:var(--mar);font-weight:700;font-size:.92rem}
 .nv-table td{font-weight:650;color:#3a2427;font-size:.93rem}
 .nv-table td.f{background:#fff6e3}
-.nv-table td.yes{color:#1a9a4b;font-size:1.25rem;font-weight:900}
-.nv-table td.no{color:#c9b9ae;font-size:1.05rem}
+.nv-table tr.hd th{background:#fff3da;color:var(--red);text-align:left;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;padding:10px 16px;border-bottom:1px solid #f1dfb8}
+.nv-table tr.xr th{vertical-align:top;padding-top:18px}
+.mk{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;font-weight:900;font-size:.9rem;line-height:1}
+.mk.ok{background:#e4f6ea;color:#1a9a4b;box-shadow:0 0 0 3px #f3fbf6}
+.mk.x{background:#f7eeee;color:#c9a3a3;font-size:.8rem}
+.mk-l{display:block;margin-top:5px;font-size:.78rem;font-weight:750;color:#3a2427}
+.nv-table td.ex{padding:18px 14px 20px;vertical-align:top}
+.nv-table .ex-list{display:grid;gap:9px;justify-items:center}
+.nv-table .tg{display:block;width:232px;max-width:100%;height:42px;background:linear-gradient(135deg,#ffe7ae,#ffd36b);border-radius:8px 10px 10px 8px;box-shadow:0 2px 6px #e6a31a40;transition:transform .2s,box-shadow .2s}
+.nv-table .tg:hover{transform:translateY(-2px);box-shadow:0 6px 14px #e6a31a66}
+.nv-table .tg-in{position:relative;display:flex;align-items:center;gap:8px;height:100%;padding:0 12px 0 30px;font-size:.78rem;font-weight:700;line-height:1.2;color:#6d0d17;text-align:left}
+.nv-table .tg-in:before{content:'';position:absolute;left:11px;top:50%;width:8px;height:8px;margin-top:-4px;border-radius:50%;background:#fff8e6;box-shadow:inset 0 0 0 1.5px #c98a12}
+.nv-table .tg-k{flex:none;display:grid;place-items:center;width:16px;height:16px;border-radius:50%;background:#1a9a4b;color:#fff;font-style:normal;font-weight:900;font-size:.6rem}
 .nv-table tbody tr:last-child th,.nv-table tbody tr:last-child td{border-bottom:0}
-.nv-learn{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:28px 0 8px}
 .nv-notes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}
 .nv-notes div{background:#fff;border:1px solid #ecd9b4;border-radius:14px;padding:16px;text-align:center;font-weight:700;color:var(--mar);font-size:.92rem}
-.nv-notes span{display:block;font-size:1.6rem;margin-bottom:4px}
 .nv-notes small{display:block;color:#7b5a5e;font-weight:500;font-size:.78rem;margin-top:2px}
 .nv-cta{background:linear-gradient(135deg,#6d0d17,#a3161f);color:#fff;text-align:center}
 .nv-cta h2{font-family:Georgia,serif;font-size:clamp(1.8rem,4vw,2.6rem);margin:0}
 .nv-contact{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:24px 0 28px}
 .nv-contact a{display:inline-flex;align-items:center;gap:8px;background:#ffffff1f;border:1px solid #ffffff44;padding:11px 18px;border-radius:99px;font-weight:650}
 .nv-contact a:hover{background:#ffffff33}
-.nv-modal{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:18px;background:#2a0a0e00;transition:background .25s;overflow-y:auto}
-.nv-modal[hidden]{display:none}
-.nv-modal.on{background:#2a0a0eb3}
-.nv-sheet{position:relative;width:min(520px,100%);background:#fff;border-radius:22px;padding:28px 26px 24px;border-top:6px solid var(--gold);text-align:center;opacity:0;transform:translateY(30px) scale(.94);transition:opacity .25s,transform .3s cubic-bezier(.2,.9,.3,1.2)}
-.nv-modal.on .nv-sheet{opacity:1;transform:none}
-.nv-sheet h3{font-family:Georgia,serif;font-size:1.7rem;margin:4px 0 0;color:var(--mar)}
-.nv-sprice{font-size:2rem;font-weight:900;color:var(--red);letter-spacing:-.04em}
-.nv-sprice span{font-size:.95rem;font-weight:600;color:#7b5a5e}
-.nv-sheet .best{color:#6b5558;margin:2px 0 14px;font-size:.92rem}
-.nv-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0}
-.nv-tiles div{background:#fff3da;border-radius:12px;padding:10px 4px}
-.nv-tiles b{display:block;font-size:1.5rem;color:var(--red);line-height:1.1}
-.nv-tiles span{display:block;font-weight:700;font-size:.78rem;color:var(--mar)}
-.nv-tiles i{display:block;font-style:normal;font-size:.66rem;color:#8a6f6f}
-.nv-perks{list-style:none;padding:0;margin:0 0 20px;text-align:left;display:grid;gap:8px}
-.nv-perks li{padding-left:28px;position:relative;font-size:.93rem;color:#3a2427}
-.nv-perks li:before{content:'✓';position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:#e4f6ea;color:#1a9a4b;font-weight:900;font-size:.8rem;display:grid;place-items:center}
-.nv-sheet .nv-btn{width:100%}
-.nv-x{position:absolute;top:10px;right:14px;border:0;background:none;font-size:2rem;line-height:1;color:#7b5a5e;cursor:pointer}
-@media(max-width:760px){.nv-prices{grid-template-columns:1fr}.nv-price.is-featured,.nv-price.is-featured:hover{transform:none}.nv .nv-learn .nv-btn{width:100%}.nv-notes{grid-template-columns:1fr}.nv-tiles{grid-template-columns:repeat(2,1fr)}}
-@media(prefers-reduced-motion:reduce){.nv-sheet,.nv-modal,.nv-lights i{transition:none;animation:none}}
+@media(max-width:760px){.nv-prices{grid-template-columns:1fr}.nv-price.is-featured,.nv-price.is-featured:hover{transform:none}.nv .nv-learn .nv-btn{width:100%}.nv-notes{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.nv-lights i,.nv-drop{animation:none}.nv-table .ex-i,.nv-table .ex-e{transition:none}}
 </style>
