@@ -1,5 +1,7 @@
 ---
 import { campaignConfig as c, site, wa } from '../config/site';
+// Campaign ended: send old ad and search traffic to the standard program page.
+if (!c.enabled) return Astro.redirect('/program', 301);
 const fmt=(n:number)=>`₹${n.toLocaleString('en-IN')}`;
 const pillars=[['01','BUILD','Digital Foundation','Landing page, domain, business email and business profiles.'],['02','ATTRACT','Content & Lead Generation','Creative assets, campaigns and audience reach.'],['03','CAPTURE','Enquiry + WhatsApp + CRM','Make every enquiry easier to capture and organise.'],['04','OPTIMIZE','36 Performance Checkpoints','Improve campaign, creative and audience performance.']];
 const groups=[['Lead generation',['300+ Lead Records*','3 Lead Campaigns','Ad Manager Setup','Campaign Monitoring']],['Content & creative',['10 Static Creatives','10 Festive / Branding Creatives','Content Calendar','Posting']],['Digital foundation',['Single Project Landing Page','Custom Domain','2 Business Email IDs','Facebook + Instagram Setup','WhatsApp Business Integration','Google Business Profile Setup','Basic SEO','Analytics & Tracking']],['CRM & lead management',['CRM Integration','Lead Tracking','Lead Capture','Enquiry Form','WhatsApp CTA']],['Optimization',['36 Optimization Checkpoints','Performance Monitoring','Campaign Optimization','Creative Optimization','Audience Optimization']]];
