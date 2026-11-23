@@ -1,5 +1,6 @@
 ---
-// Homepage redesign (2026-11). Raw HTML kept in src/content/home.html; all other pages are unchanged.
-import html from '../content/home.html?raw';
+// Homepage: same layout, menu and footer as every other page (Base via Shell). Content lives in src/content/home-body.html.
+import Shell from '../components/Shell.astro';
+import body from '../content/home-body.html?raw';
 ---
-<Fragment set:html={html} />
+<Shell title='DigiAds | Digital growth for Indian small businesses' description='DigiAds, by AO Plus Solutions: a 90-day digital growth program, monthly social and lead-generation plans, and free AI visibility reports for Indian small businesses.'><Fragment set:html={body} /></Shell>

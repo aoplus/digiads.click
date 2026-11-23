@@ -37,6 +37,8 @@ const { title, description, jsonld = [] } = Astro.props;
 .vp .linklist{display:flex;gap:10px 22px;flex-wrap:wrap;padding:0;list-style:none} .vp .linklist a{color:var(--blue);font-weight:700}
 .vp details{padding:16px 0;border-bottom:1px solid var(--line)} .vp summary{font-weight:750;cursor:pointer;color:var(--ink)}
 .vp .prose{max-width:760px;font-size:1.04rem}
+.vp .stats{display:flex;gap:30px;flex-wrap:wrap}.vp .stats b{display:block;font-size:1.8rem;color:var(--blue);letter-spacing:-.05em}.vp .stats span{color:var(--muted);font-size:.85rem}
+.vp .btn.s{padding:10px 14px}
 @media(max-width:900px){.vp .g4{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:760px){.vp .g3,.vp .g4{grid-template-columns:1fr}.vp .hero.left{padding:30px 20px}}
 </style>
