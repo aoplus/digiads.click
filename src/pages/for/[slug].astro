@@ -1,0 +1,63 @@
+---
+export const prerender = true;
+import Shell from '../../components/Shell.astro';
+import { verticals, audits, sharedFaq } from '../../config/verticals';
+export function getStaticPaths() { return verticals.map((v) => ({ params: { slug: v.slug }, props: { v } })); }
+const { v } = Astro.props;
+const inr = (n: number) => '₹' + n.toLocaleString('en-IN');
+const WA = 'https://wa.me/917977875818?text=';
+const faq = [...v.faq, ...sharedFaq];
+const second = v.start === 'AUDIT-FULL' ? 'AUDIT-QUICK' : 'AUDIT-FULL';
+const cards = [{ sku: v.start, tag: 'Start here', hot: true }, { sku: second, tag: '', hot: false }] as const;
+const path = `/for/${v.slug}`;
+const jsonld = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'DigiAds', item: 'https://digiads.click/' },
+    { '@type': 'ListItem', position: 2, name: 'Industries', item: 'https://digiads.click/for' },
+    { '@type': 'ListItem', position: 3, name: v.name, item: `https://digiads.click${path}` } ] },
+];
+---
+<Shell title={v.title} description={v.description} path={path} jsonld={jsonld}>
+  <div class="crumbs"><a href="/">Home</a> / <a href="/for">Industries</a> / {v.name}</div>
+  <div class="hero left">
+    <span class="pill">For {v.short.toLowerCase()}</span>
+    <h1>{v.h1}</h1>
+    <p>{v.intro}</p>
+    <div class="cta">
+      <a class="btn p" data-event="vertical_free_report" data-location={v.slug} href="https://kya.digiads.click">Free AI visibility report</a>
+      <a class="btn" data-event="vertical_see_audits" data-location={v.slug} href="#audits">See the audits</a>
+    </div>
+    <div class="note">No card needed for the free report. We only follow up if you agree to it.</div>
+  </div>
+
+  <section><h2>How your customers look for you</h2><p class="prose">{v.behaviour}</p></section>
+
+  <section><h2>Where {v.name.toLowerCase()} lose enquiries</h2><p class="lead">Four patterns we see again and again on small-business sites. Your audit shows which of them apply to you.</p>
+    <div class="grid g4">{v.losses.map(([h, p], i) => <div class="card"><div class="num">{i + 1}</div><h3>{h}</h3><p>{p}</p></div>)}</div></section>
+
+  <section><div class="band"><h2>What we check for you</h2><p class="lead">Three audits, each ending in a fix list ranked by impact so you start with what matters.</p>
+    <div class="grid g3">
+      <div class="card"><div class="kicker">Website audit</div><p>{v.checks.website}</p></div>
+      <div class="card"><div class="kicker">AI visibility report</div><p>{v.checks.ai}</p></div>
+      <div class="card"><div class="kicker">Social media audit</div><p>{v.checks.social}</p></div>
+    </div></div></section>
+
+  <section id="audits"><h2>Where to start</h2><p class="lead">{v.why}</p>
+    <div class="grid g3">
+      {cards.map((c) => { const a = audits[c.sku]; return (
+        <div class={`card price${c.hot ? ' hot' : ''}`}>{c.tag && <span class="tag">{c.tag}</span>}<h3>{a.name}</h3><div class="amt">{inr(a.price)}<small> + GST</small></div>
+          <ul>{a.points.map((p) => <li>{p}</li>)}</ul>
+          <button class={`btn${c.hot ? ' p' : ''}`} type="button" data-buy={c.sku} data-event="vertical_buy" data-location={`${v.slug}-${c.sku}`}>Buy now</button></div>); })}
+      <div class="card price"><h3>Free AI visibility report</h3><div class="amt">₹0</div><ul><li>Checks how ready your site is to be found and cited by AI assistants</li><li>No card needed</li></ul><a class="btn" data-event="vertical_free_report" data-location={`${v.slug}-card`} href="https://kya.digiads.click">Get the free report</a></div>
+    </div>
+    <p class="small" style="margin-top:10px">Secure payment by Razorpay: UPI, cards and netbanking. Prices exclude GST. Questions? <a href={WA + encodeURIComponent(`Hi DigiAds, I have a question about the audits for my ${v.short.toLowerCase()} business`)} rel="noopener">WhatsApp us</a>.</p></section>
+
+  <section><div class="band"><h2>Want us to do the fixing?</h2>
+    <p class="lead">The audits tell you what to fix. If you would rather have a team do it, the 90-Day Growth Program covers brand foundation, digital presence, lead generation and optimization checkpoints, with a fixed scope and price.</p>
+    <p style="margin:0"><a class="btn p" data-event="vertical_program" data-location={v.slug} href="/program">See the 90-Day Program</a> &nbsp; <a class="btn" data-event="click_whatsapp" data-location={`vertical-${v.slug}`} href={WA + encodeURIComponent(`Hi DigiAds, I run a business in the ${v.name.toLowerCase()} space and I'd like a growth plan`)} rel="noopener">Talk to us on WhatsApp</a></p></div></section>
+
+  <section><h2>Questions</h2>{faq.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}</section>
+
+  <section><h2>Other industries</h2><ul class="linklist">{verticals.filter((x) => x.slug !== v.slug).map((x) => <li><a href={`/for/${x.slug}`}>{x.name}</a></li>)}</ul></section>
+</Shell>
