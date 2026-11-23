@@ -1,4 +1,73 @@
 ---
-import Page from '../components/Page.astro'; const groups=[['Lead generation',['300+ Lead Records*','3 Lead Campaigns','Ad Manager Setup','Campaign Monitoring']],['Creative',['10 Static Creatives','10 Festive / Branding Creatives','Content Calendar & Posting']],['Digital foundation',['Single Project Landing Page','Custom Domain','2 Business Email IDs','Facebook + Instagram Setup','WhatsApp Business','Google Business Profile','Basic SEO & Analytics']],['Lead management',['CRM Integration','Lead Tracking','Lead Capture','Enquiry Form','WhatsApp CTA']],['Optimization',['36 Optimization Checkpoints','Performance, creative and audience optimization']]];
+import Shell from '../components/Shell.astro';
+const WA = 'https://wa.me/917977875818?text=';
+// Scope below is the existing 90-Day Program scope (unchanged); the phases only arrange it in time. Timing is indicative.
+const phases = [
+  { days: 'Days 1 to 14', name: 'Foundation', goal: 'Get your brand and accounts ready to sell from.', items: [
+    'Kickoff call: your audience, your goal, and the one offer we build around (a cohort, course, workshop or consultation)',
+    'Brand foundation: logo refinement, colours, typography and social profile identity',
+    'Custom domain and 2 business email IDs',
+    'Facebook and Instagram pages, WhatsApp Business and Google Business Profile set up',
+    'Basic SEO and analytics installed so every result can be measured'], milestone: 'Brand and accounts ready' },
+  { days: 'Days 15 to 30', name: 'Launch', goal: 'Put your offer live and start collecting enquiries.', items: [
+    'Single-offer landing page built and published, with enquiry form, WhatsApp button and lead capture',
+    'CRM integration and lead tracking, so every enquiry lands in one place',
+    'Ad Manager set up, first creatives made, content calendar and posting begin',
+    'Lead Campaign 1 goes live'], milestone: 'Landing page live, first campaign running' },
+  { days: 'Days 31 to 60', name: 'Grow', goal: 'Run all three campaigns and learn what your audience responds to.', items: [
+    'Lead Campaigns 2 and 3 launch (3 lead campaigns in the program)',
+    'Creatives delivered through the program: 10 static and 10 festive or branding, with posting',
+    'Campaign monitoring, with optimization checkpoints on performance, creative and audience'], milestone: 'Three campaigns running, reviewed with you' },
+  { days: 'Days 61 to 90', name: 'Optimize and hand over', goal: 'Keep what works, cut what does not, and leave you with a system.', items: [
+    'Remaining optimization checkpoints (36 across the program): scale the best audience and creative, stop the rest',
+    'Lead records organised for your team to follow up (target 300+, see the note below)',
+    'Final review of what worked, what it cost, and what to do next'], milestone: 'Review and handover' },
+];
+const scope = [['Lead generation', ['300+ Lead Records*', '3 Lead Campaigns', 'Ad Manager Setup', 'Campaign Monitoring']], ['Creative', ['10 Static Creatives', '10 Festive / Branding Creatives', 'Content Calendar & Posting']], ['Digital foundation', ['Single Project Landing Page', 'Custom Domain', '2 Business Email IDs', 'Facebook + Instagram Setup', 'WhatsApp Business', 'Google Business Profile', 'Basic SEO & Analytics']], ['Lead management', ['CRM Integration', 'Lead Tracking', 'Lead Capture', 'Enquiry Form', 'WhatsApp CTA']], ['Optimization', ['36 Optimization Checkpoints', 'Performance, creative and audience optimization']]];
+const faq = [
+  ['Do you guarantee a number of leads?', 'No. We build and run the system and report honestly. Results depend on your market, offer, ad budget and how quickly your team follows up. The 300+ lead records is the program target, not a promise.'],
+  ['Is ad spend included?', 'No. Advertising spend (for example Meta ads) is additional and paid by you directly to the platform, so you see exactly where the money goes.'],
+  ['Does this replace the tool I use to host classes or take bookings?', 'No. The program builds your brand, landing page, campaigns and lead system. It works alongside whatever you use to run classes, take payments or manage bookings.'],
+  ['Are prices inclusive of GST?', 'No. The program price of ₹90,000 excludes GST.'],
+  ['Is there a long contract?', 'The program has a fixed scope and price for 90 days. We confirm terms in writing before you pay.'],
+];
+const jsonld = [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) }];
 ---
-<Page title="90-Day Growth Program" heading="90 Days to Build, Launch & Optimize Your Digital Growth Engine" intro="A standardized, focused program for building the foundation and campaigns your business needs."><div class="grid">{groups.map(([h,items])=><article class="card"><h3>{h}</h3><ul class="list">{items.map(i=><li>{i}</li>)}</ul></article>)}</div><p class="legal">*Lead volume depends on campaign performance, audience, industry, geography and client-funded advertising spend. Meta advertising budget is additional and paid directly by the client.</p><div class="cta"><h2>DigiAds generates and organizes the leads. Your team follows up and closes the business.</h2></div></Page>
+<Shell title="90-Day Growth Program for Creators and Coaches | DigiAds" description="A fixed-scope, 90-day plan that turns your audience into enquiries: brand, landing page, lead campaigns and weekly optimization. See exactly what happens, phase by phase." jsonld={jsonld}>
+  <div class="hero left">
+    <span class="pill">For creators, coaches and educators</span>
+    <h1>Turn your audience into enrolments in 90 days</h1>
+    <p>You already have something people value. This program builds the brand, the landing page and the lead campaigns around it, then optimizes them with you. Here is exactly what happens, phase by phase.</p>
+    <div class="cta"><a class="btn p" data-event="program_cta" data-location="hero" href={WA + encodeURIComponent("Hi DigiAds, I'd like to talk about the 90-day program")} rel="noopener">Talk to us on WhatsApp</a><a class="btn" data-event="program_free_report" data-location="hero" href="https://kya.digiads.click">Start with a free AI visibility report</a></div>
+    <div class="note">₹90,000 + GST for the 90 days. Ad spend is paid by you directly to the ad platform.</div>
+  </div>
+
+  <section id="roadmap"><h2>Your 90-day roadmap</h2><p class="lead">Four phases, each ending in something you can see. Dates are indicative and are confirmed at kickoff; they depend on how quickly you share assets and approve work.</p>
+    <div class="road">{phases.map((p, i) => <div class="phase"><div class="when"><div class="step">Phase {i + 1}</div><div class="days">{p.days}</div></div><div><h3>{p.name}</h3><p class="goal">{p.goal}</p><ul>{p.items.map((t) => <li>{t}</li>)}</ul><span class="milestone">Milestone: {p.milestone}</span></div></div>)}</div></section>
+
+  <section><div class="band"><h2>What a creator gets</h2><p class="lead">A coach filling a cohort, an educator launching a course, a trainer booking consultations: the same system, pointed at your one offer.</p>
+    <div class="grid g3">
+      <div class="card"><h3>One clear offer</h3><p>A single-offer landing page with an enquiry form and a WhatsApp button, so visitors know what to do next.</p></div>
+      <div class="card"><h3>Every enquiry in one place</h3><p>Leads captured, tracked and organised in a CRM, so none get lost between DMs, forms and calls.</p></div>
+      <div class="card"><h3>A brand people recognise</h3><p>Profile identity, colours and a content calendar, so your page looks the same everywhere you show up.</p></div>
+    </div></div></section>
+
+  <section><h2>Everything in the program</h2><p class="lead">The full scope, in one list.</p>
+    <div class="grid g3">{scope.map(([h, items]) => <div class="card"><h3>{h}</h3><ul class="plain">{items.map((i) => <li>{i}</li>)}</ul></div>)}</div>
+    <p class="small">*Lead volume depends on campaign performance, audience, industry, geography and client-funded advertising spend. Meta advertising budget is additional and paid directly by you.</p></section>
+
+  <section><h2>What we need from you</h2>
+    <div class="grid g3">
+      <div class="card"><h3>Your offer and assets</h3><p>Details of what you sell, your logo and photos if you have them, and access to your social accounts.</p></div>
+      <div class="card"><h3>Quick approvals</h3><p>Timely feedback on creatives and the landing page keeps each phase on schedule.</p></div>
+      <div class="card"><h3>Fast follow-up</h3><p>DigiAds generates and organizes the leads. Your team follows up and closes. Replying quickly makes the biggest difference.</p></div>
+    </div></section>
+
+  <section><div class="band"><h2>Not ready for 90 days yet?</h2><p class="lead">Start smaller. Know where you stand with an audit, then decide.</p>
+    <p style="margin:0"><a class="btn p" data-event="program_audits" data-location="band" href="/for/coaches-and-educators/">See audits for coaches and educators</a> &nbsp; <a class="btn" data-event="program_free_report" data-location="band" href="https://kya.digiads.click">Free AI visibility report</a></p></div></section>
+
+  <section><h2>Questions</h2>{faq.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}</section>
+
+  <section><div class="band"><h2>Ready to start?</h2><p class="lead">Tell us about your offer and we will confirm scope, timing and terms in writing before you pay.</p>
+    <p style="margin:0"><a class="btn p" data-event="program_cta" data-location="footer" href={WA + encodeURIComponent("Hi DigiAds, I'd like to start the 90-day program")} rel="noopener">Talk to us on WhatsApp</a></p></div></section>
+</Shell>

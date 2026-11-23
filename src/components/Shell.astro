@@ -1,5 +1,5 @@
 ---
-// Industry pages use the same layout as Program, Services and About (Base): same header, menu, fonts and footer.
+// Industry pages use the same layout as Program and About (Base): same header, menu, fonts and footer.
 // The page templates keep their own class names; the styles below map them onto Base's palette, scoped under .vp.
 import Base from './Base.astro';
 const { title, description, jsonld = [] } = Astro.props;
@@ -39,6 +39,13 @@ const { title, description, jsonld = [] } = Astro.props;
 .vp .prose{max-width:760px;font-size:1.04rem}
 .vp .stats{display:flex;gap:30px;flex-wrap:wrap}.vp .stats b{display:block;font-size:1.8rem;color:var(--blue);letter-spacing:-.05em}.vp .stats span{color:var(--muted);font-size:.85rem}
 .vp .btn.s{padding:10px 14px}
+.vp .road{display:grid;gap:14px;margin-top:20px}
+.vp .phase{display:grid;grid-template-columns:150px 1fr;gap:22px;border:1px solid var(--line);border-radius:14px;padding:22px}
+.vp .phase .step{color:var(--purple);font-weight:800;text-transform:uppercase;letter-spacing:.1em;font-size:.7rem}
+.vp .phase .days{font-weight:900;font-size:1.2rem;color:var(--blue);letter-spacing:-.03em;line-height:1.2;margin-top:4px}
+.vp .phase h3{margin:0 0 4px;font-size:1.15rem}.vp .phase .goal{margin:0 0 8px;color:var(--ink);font-weight:600}
+.vp .phase ul,.vp .plain{padding-left:18px;margin:8px 0;color:var(--muted)} .vp .plain{font-size:.92rem}
+.vp .milestone{display:inline-block;margin-top:6px;background:var(--soft);border-radius:999px;padding:5px 13px;font-weight:700;font-size:.8rem;color:var(--purple)}
 @media(max-width:900px){.vp .g4{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:760px){.vp .g3,.vp .g4{grid-template-columns:1fr}.vp .hero.left{padding:30px 20px}}
+@media(max-width:760px){.vp .phase{grid-template-columns:1fr;gap:6px}.vp .g3,.vp .g4{grid-template-columns:1fr}.vp .hero.left{padding:30px 20px}}
 </style>
