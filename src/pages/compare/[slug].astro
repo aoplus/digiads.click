@@ -1,0 +1,27 @@
+---
+export const prerender = true;
+import Shell from '../../components/Shell.astro';
+import { compares } from '../../config/compare';
+export function getStaticPaths() { return compares.map((c) => ({ params: { slug: c.slug }, props: { c } })); }
+const { c } = Astro.props;
+const path = `/compare/${c.slug}/`;
+const jsonld = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: c.faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'DigiAds', item: 'https://digiads.click/' }, { '@type': 'ListItem', position: 2, name: 'Compare', item: 'https://digiads.click/compare/' }, { '@type': 'ListItem', position: 3, name: c.h1, item: `https://digiads.click${path}` }] },
+];
+---
+<Shell title={c.title} description={c.description} path={path} jsonld={jsonld}>
+  <div class="crumbs"><a href="/">Home</a> / <a href="/compare/">Compare</a> / {c.slug}</div>
+  <div class="hero left"><span class="pill">Compare</span><h1>{c.h1}</h1><p>{c.intro}</p>
+    <div class="cta"><a class="btn p" data-event="compare_free_report" data-location={c.slug} href="https://kya.digiads.click">Free AI visibility report</a><a class="btn" data-event="compare_program" data-location={c.slug} href="/program">See the 90-Day Program</a></div></div>
+  <section><h2>Side by side</h2>
+    <div style="overflow-x:auto"><table class="cmp"><thead><tr><th></th><th>{c.name.charAt(0).toUpperCase() + c.name.slice(1)}</th><th>DigiAds 90-Day Program</th></tr></thead>
+      <tbody>{c.rows.map(([h, a, b]) => <tr><th scope="row">{h}</th><td>{a}</td><td>{b}</td></tr>)}</tbody></table></div></section>
+  <section><div class="grid g3" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+    <div class="card"><h3>{c.slug === 'diy' ? 'Doing it yourself fits if' : `${c.name.charAt(0).toUpperCase() + c.name.slice(1)} fits if`}</h3><ul class="plain">{c.whenThem.map((w) => <li>{w}</li>)}</ul></div>
+    <div class="card"><h3>DigiAds fits if</h3><ul class="plain">{c.whenUs.map((w) => <li>{w}</li>)}</ul></div></div>
+    <p class="small" style="margin-top:12px">This is general guidance, not a ranking. Results depend on your market, offer, budget and follow-up, and nothing here is a guarantee. Ad spend is always paid by you directly to the platform.</p></section>
+  <section><h2>Questions</h2>{c.faq.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}</section>
+  <section><div class="band"><h2>Not sure yet?</h2><p class="lead">Start with the free report. It costs nothing and you can use it with anyone.</p><p style="margin:0"><a class="btn p" data-event="compare_bottom_report" data-location={c.slug} href="https://kya.digiads.click">Get the free report</a></p></div></section>
+  <style>.cmp{width:100%;border-collapse:collapse;font-size:15px}.cmp th,.cmp td{padding:10px 12px;border-bottom:1px solid var(--line,#e5e5e0);text-align:left;vertical-align:top}.cmp thead th{font-size:13px;text-transform:uppercase;letter-spacing:.04em}.cmp tbody th{width:20%;font-weight:600}</style>
+</Shell>

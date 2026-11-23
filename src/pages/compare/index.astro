@@ -1,0 +1,9 @@
+---
+export const prerender = true;
+import Shell from '../../components/Shell.astro';
+import { compares } from '../../config/compare';
+---
+<Shell title="Compare Your Options | DigiAds" description="Agency, freelancer or do it yourself? Honest comparisons for founders, creators and coaches choosing how to grow online." path="/compare/">
+  <div class="hero left"><span class="pill">Compare</span><h1>Choosing how to grow online</h1><p>Three honest comparisons, including when the other option is the better one.</p></div>
+  <section><div class="grid g3">{compares.map((c) => <div class="card"><h3>{c.h1}</h3><p>{c.description}</p><p><a class="btn" href={`/compare/${c.slug}/`}>Read the comparison</a></p></div>)}</div></section>
+</Shell>
