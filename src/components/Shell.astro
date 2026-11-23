@@ -13,8 +13,7 @@ const WA = 'https://wa.me/917977875818?text=';
 <meta name="description" content={description}>
 <link rel="canonical" href={url}><link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:type" content="website"><meta property="og:url" content={url}><meta name="twitter:card" content="summary">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SSRW674JW7"></script>
-<script is:inline>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-SSRW674JW7');</script>
+<script src="/consent.js" data-ga="G-SSRW674JW7" defer></script>
 <script type="application/ld+json" is:inline set:html={JSON.stringify({'@context':'https://schema.org','@type':'Organization',name:'DigiAds.click',url:'https://digiads.click',email:'marketing@digiads.click',telephone:'+917977875818'})}></script>
 {jsonld.map((j) => <script type="application/ld+json" is:inline set:html={JSON.stringify(j)}></script>)}
 <style is:global>
@@ -60,8 +59,8 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--mute);font-si
 <main id="top"><div class="wrap"><slot /></div></main>
 <footer><div class="wrap foot">
   <div><b>DigiAds</b> · a service of AO Plus Solutions Pvt Ltd<br>WhatsApp: <a href="https://wa.me/917977875818" rel="noopener">+91 79778 75818</a></div>
-  <div><a href="/how-it-works">How it works</a><a href="/for/">Industries</a><a href="/who-we-serve">Who we serve</a><a href="/privacy">Privacy Policy</a><a href="/terms">Terms &amp; Conditions</a></div>
+  <div><a href="/how-it-works">How it works</a><a href="/for/">Industries</a><a href="/who-we-serve">Who we serve</a><a href="/privacy">Privacy Policy</a><a href="#" data-consent-open>Cookie settings</a><a href="/terms">Terms &amp; Conditions</a></div>
 </div></footer>
 <script src="https://shop.digiads.click/buy.js" defer></script>
-<script is:inline>document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-event]');if(a&&window.gtag)gtag('event',a.dataset.event,{location:a.dataset.location,page:location.pathname})})</script>
+
 </body></html>
