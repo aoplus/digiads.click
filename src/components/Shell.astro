@@ -46,6 +46,12 @@ const { title, description, jsonld = [] } = Astro.props;
 .vp .phase h3{margin:0 0 4px;font-size:1.15rem}.vp .phase .goal{margin:0 0 8px;color:var(--ink);font-weight:600}
 .vp .phase ul,.vp .plain{padding-left:18px;margin:8px 0;color:var(--muted)} .vp .plain{font-size:.92rem}
 .vp .milestone{display:inline-block;margin-top:6px;background:var(--soft);border-radius:999px;padding:5px 13px;font-weight:700;font-size:.8rem;color:var(--purple)}
+.vp .pains{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}
+.vp .pain{border:1px solid var(--line);border-radius:14px;padding:20px}
+.vp .pain .thought{margin:0 0 8px;font-weight:800;font-size:1.02rem;color:var(--ink);line-height:1.35}
+.vp .pain .why{margin:0 0 10px;font-size:.92rem}.vp .pain .fix{margin:0;font-size:.92rem;color:var(--ink);border-top:1px solid var(--line);padding-top:10px}.vp .pain .fix b{color:var(--blue)}
+.vp .phase .alone{background:var(--soft);border-radius:10px;padding:12px 14px;margin:10px 0;font-size:.92rem;color:var(--muted)}.vp .phase .alone b{display:block;color:var(--ink);font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
+.vp .phase .cols{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;margin:10px 0}.vp .phase h4{margin:0 0 2px;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--purple)}
 @media(max-width:900px){.vp .g4{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:760px){.vp .phase{grid-template-columns:1fr;gap:6px}.vp .g3,.vp .g4{grid-template-columns:1fr}.vp .hero.left{padding:30px 20px}}
+@media(max-width:760px){.vp .pains,.vp .phase .cols{grid-template-columns:1fr}.vp .phase{grid-template-columns:1fr;gap:6px}.vp .g3,.vp .g4{grid-template-columns:1fr}.vp .hero.left{padding:30px 20px}}
 </style>
