@@ -1,5 +1,8 @@
 ---
 import Shell from '../components/Shell.astro';
+import { priceSpan } from '../config/pricing';
+const esc = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+const withProgramPrice = (t: string) => esc(t).replace('₹90,000', priceSpan('program'));
 const WA = 'https://wa.me/917977875818?text=';
 // Scope below is the existing 90-Day Program scope (unchanged); the phases only arrange it in time. Timing is indicative.
 const pains = [
@@ -55,7 +58,7 @@ const jsonld = [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEnti
     <h1>Turn your audience into enrolments in 90 days</h1>
     <p>You already have something people value. Doing digital marketing on your own is slow, confusing and easy to get wrong. This program learns your business first, then builds the brand, landing page and lead campaigns around it, and optimizes them with you.</p>
     <div class="cta"><a class="btn p" data-event="program_cta" data-location="hero" href={WA + encodeURIComponent("Hi DigiAds, I'd like to talk about the 90-day program")} rel="noopener">Talk to us on WhatsApp</a><a class="btn" data-event="program_free_report" data-location="hero" href="https://kya.digiads.click">Start with a free AI visibility report</a></div>
-    <div class="note">₹90,000 + GST for the 90 days. Ad spend is paid by you directly to the ad platform.</div>
+    <div class="note"><Fragment set:html={priceSpan('program')} /> + GST for the 90 days. Ad spend is paid by you directly to the ad platform.</div><div class="taxline" data-tax>+ 18% GST · Ad spend paid directly</div>
   </div>
 
   <section id="diy"><h2>Doing it alone: where it usually goes wrong</h2><p class="lead">These are things founders tell us. Each one has a fix built into the program.</p>
@@ -77,7 +80,7 @@ const jsonld = [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEnti
   <section><div class="band"><h2>Not ready for 90 days yet?</h2><p class="lead">Start smaller. Know where you stand with an audit, then decide.</p>
     <p style="margin:0"><a class="btn p" data-event="program_audits" data-location="band" href="/for/coaches-and-educators/">See audits for coaches and educators</a> &nbsp; <a class="btn" data-event="program_free_report" data-location="band" href="https://kya.digiads.click">Free AI visibility report</a></p></div></section>
 
-  <section><h2>Questions</h2>{faq.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}</section>
+  <section><h2>Questions</h2>{faq.map(([q, a]) => <details><summary>{q}</summary><p set:html={withProgramPrice(a)} /></details>)}</section>
 
   <section><div class="band"><h2>Ready to start?</h2><p class="lead">Tell us about your offer and we will confirm scope, timing and terms in writing before you pay.</p>
     <p style="margin:0"><a class="btn p" data-event="program_cta" data-location="footer" href={WA + encodeURIComponent("Hi DigiAds, I'd like to start the 90-day program")} rel="noopener">Talk to us on WhatsApp</a></p></div></section>

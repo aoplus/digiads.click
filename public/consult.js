@@ -6,10 +6,10 @@
   function el(t, a, c) { var e = document.createElement(t); for (var k in (a || {})) e.setAttribute(k, a[k]); (c || []).forEach(function (x) { e.appendChild(typeof x === 'string' ? document.createTextNode(x) : x); }); return e; }
   function css() {
     if (document.getElementById('dgq-css')) return; var s = document.createElement('style'); s.id = 'dgq-css';
-    s.textContent = '.dgq-ov{position:fixed;inset:0;z-index:2147482000;background:#0007;display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:16px}.dgq{background:#fff;color:#16161a;border-radius:14px;max-width:460px;width:100%;margin:auto;padding:20px;font:15px/1.5 Inter,system-ui,sans-serif;box-shadow:0 10px 40px #0004}' +
-      '.dgq h2{margin:0 0 4px;font-size:20px}.dgq p{margin:4px 0 10px;color:#4a4a52}.dgq label{display:block;font-weight:600;font-size:13px;margin-top:10px}.dgq input,.dgq textarea{width:100%;padding:10px;border:1px solid #cfcfc9;border-radius:8px;font:inherit;margin-top:4px;background:#fff;color:#16161a}' +
-      '.dgq .c{display:flex;gap:8px;align-items:flex-start;font-weight:400;font-size:13px}.dgq .c input{width:auto;margin-top:3px}.dgq button{padding:11px 16px;border-radius:10px;border:0;background:#3d3df5;color:#fff;font:600 15px Inter,system-ui,sans-serif;cursor:pointer;margin-top:14px}.dgq button.o{background:none;color:#3d3df5;border:1px solid #3d3df5;margin-left:8px}' +
-      '.dgq .e{color:#b42318;font-size:14px;min-height:20px}.dgq .hp{position:absolute;left:-9999px;height:0;overflow:hidden}.dgq a{color:#3d3df5}.dgq input:focus-visible,.dgq textarea:focus-visible,.dgq button:focus-visible{outline:3px solid #3d3df5;outline-offset:2px}' +
+    s.textContent = '.dgq-ov{position:fixed;inset:0;z-index:2147482000;background:#0007;display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:16px}.dgq{background:#fff;color:#16161a;border-radius:12px;max-width:460px;width:100%;margin:auto;padding:20px;font:15px/1.5 Inter,system-ui,sans-serif;border:1px solid #e4e4e7}' +
+      '.dgq h2{margin:0 0 4px;font-size:20px}.dgq p{margin:4px 0 10px;color:#4a4a52}.dgq label{display:block;font-weight:600;font-size:13px;margin-top:10px}.dgq input,.dgq textarea{width:100%;padding:10px;border:1px solid #d4d4d8;border-radius:6px;min-height:44px;font:inherit;margin-top:4px;background:#fff;color:#16161a}' +
+      '.dgq .c{display:flex;gap:8px;align-items:flex-start;font-weight:400;font-size:13px}.dgq .c input{width:auto;margin-top:3px}.dgq button{padding:0 16px;min-height:44px;border-radius:6px;border:0;background:#09090b;color:#fff;font:500 15px Inter,system-ui,sans-serif;cursor:pointer;margin-top:14px}.dgq button.o{background:none;color:#2563eb;border:1px solid #2563eb;margin-left:8px}' +
+      '.dgq .e{color:#b42318;font-size:14px;min-height:20px}.dgq .hp{position:absolute;left:-9999px;height:0;overflow:hidden}.dgq a{color:#2563eb}.dgq input:focus-visible,.dgq textarea:focus-visible,.dgq button:focus-visible{outline:3px solid #2563eb;outline-offset:2px}' +
       '@media(prefers-color-scheme:dark){.dgq{background:#1a1a1e;color:#f1f1f3}.dgq p{color:#c4c4cc}.dgq input,.dgq textarea{background:#101014;color:#f1f1f3;border-color:#3a3a42}.dgq button.o,.dgq a{color:#a9a9ff;border-color:#8c8cff}}';
     document.head.appendChild(s);
   }
@@ -33,11 +33,11 @@
       e.preventDefault(); err.textContent = '';
       if (!cons.checked) { err.textContent = 'Please tick the box so we can contact you.'; return; }
       go.disabled = true; go.textContent = 'Sending...';
-      fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name.value, email: email.value, phone: phone.value, message: (msg.value + (text ? '\n[Interest: ' + text + ']' : '')).slice(0, 600), page: location.pathname, consent: true, company_website: hp.value }) })
+      fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name.value, email: email.value, phone: phone.value, message: (msg.value + (text ? '\n[Interest: ' + text + ']' : '') + (window.digiadsPricing ? '\n[Pricing view: ' + window.digiadsPricing.currency + ']' : '')).slice(0, 600), page: location.pathname, consent: true, pricing_zone: (window.digiadsPricing && window.digiadsPricing.zone) || 'IN', currency: (window.digiadsPricing && window.digiadsPricing.currency) || 'INR', company_website: hp.value }) })
         .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
         .then(function (x) {
           if (!x.ok) { err.textContent = (x.j && x.j.error) || 'Something went wrong. Please try again.'; go.disabled = false; go.textContent = 'Request a consultation'; return; }
-          track('consult_submit'); dlg.innerHTML = ''; dlg.appendChild(el('h2', {}, ['Thank you'])); dlg.appendChild(el('p', {}, ['We have received your request and will contact you on the email or number you gave.'])); var b = el('button', { type: 'button' }, ['Close']); b.onclick = close; dlg.appendChild(b); b.focus();
+          track('consult_submit'); dlg.innerHTML = ''; dlg.appendChild(el('h2', {}, ['Thank you'])); dlg.appendChild(el('p', {}, ['We have received your request and will contact you on the email or number you gave.'])); dlg.appendChild(el('p', {}, ['While you wait, you can ', el('a', { href: 'https://kya.digiads.click', target: '_blank', rel: 'noopener' }, ['run a free audit of your website']), '.'])); var b = el('button', { type: 'button' }, ['Close']); b.onclick = close; dlg.appendChild(b); b.focus();
         }).catch(function () { err.textContent = 'Could not send. Please try again, or use WhatsApp below.'; go.disabled = false; go.textContent = 'Request a consultation'; });
     };
   }

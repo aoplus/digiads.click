@@ -2,5 +2,17 @@
 // Homepage: same layout, menu and footer as every other page (Base via Shell). Content lives in src/content/home-body.html.
 import Shell from '../components/Shell.astro';
 import body from '../content/home-body.html?raw';
+import { offerFor } from '../config/pricing';
+// Offers declare both currencies so structured data is valid and transparent for India and global search.
+const jsonld = [{
+  '@context': 'https://schema.org', '@type': 'Service', name: 'DigiAds digital growth plans', provider: { '@type': 'Organization', name: 'DigiAds.click', url: 'https://digiads.click' },
+  areaServed: 'Worldwide',
+  offers: [
+    ...offerFor('starter-monthly', 'Starter plan, per month'),
+    ...offerFor('growth-monthly', 'Growth plan, per month'),
+    ...offerFor('scale-monthly', 'Scale plan, from, per month'),
+    ...offerFor('program', '90-Day Growth Program'),
+  ],
+}];
 ---
-<Shell title='DigiAds | Digital growth for Indian small businesses' description='DigiAds, by AO Plus Solutions: a 90-day digital growth program, monthly social and lead-generation plans, and free AI visibility reports for Indian small businesses.'><Fragment set:html={body} /></Shell>
+<Shell bleed={true} jsonld={jsonld} title='DigiAds | Digital growth for Indian small businesses' description='DigiAds, by AO Plus Solutions: a 90-day digital growth program, monthly social and lead-generation plans, and free AI visibility reports for Indian small businesses.'><Fragment set:html={body} /></Shell>

@@ -2,6 +2,9 @@
 export const prerender = true;
 import Shell from '../../components/Shell.astro';
 import { compares } from '../../config/compare';
+import { priceSpan } from '../../config/pricing';
+const esc = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+const withPrice = (t: string) => esc(t).replace(/₹90,000/g, priceSpan('program'));
 export function getStaticPaths() { return compares.map((c) => ({ params: { slug: c.slug }, props: { c } })); }
 const { c } = Astro.props;
 const path = `/compare/${c.slug}/`;
@@ -16,7 +19,7 @@ const jsonld = [
     <div class="cta"><a class="btn p" data-event="compare_free_report" data-location={c.slug} href="https://kya.digiads.click">Free AI visibility report</a><a class="btn" data-event="compare_program" data-location={c.slug} href="/program">See the 90-Day Program</a></div></div>
   <section><h2>Side by side</h2>
     <div style="overflow-x:auto"><table class="cmp"><thead><tr><th></th><th>{c.name.charAt(0).toUpperCase() + c.name.slice(1)}</th><th>DigiAds 90-Day Program</th></tr></thead>
-      <tbody>{c.rows.map(([h, a, b]) => <tr><th scope="row">{h}</th><td>{a}</td><td>{b}</td></tr>)}</tbody></table></div></section>
+      <tbody>{c.rows.map(([h, a, b]) => <tr><th scope="row">{h}</th><td set:html={withPrice(a)} /><td set:html={withPrice(b)} /></tr>)}</tbody></table></div></section>
   <section><div class="grid g3" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
     <div class="card"><h3>{c.slug === 'diy' ? 'Doing it yourself fits if' : `${c.name.charAt(0).toUpperCase() + c.name.slice(1)} fits if`}</h3><ul class="plain">{c.whenThem.map((w) => <li>{w}</li>)}</ul></div>
     <div class="card"><h3>DigiAds fits if</h3><ul class="plain">{c.whenUs.map((w) => <li>{w}</li>)}</ul></div></div>
